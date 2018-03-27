@@ -1,5 +1,7 @@
 package com.example.mvplearn;
 
+import com.example.mvplearn.base.BaseView;
+
 /**
  * █████▒█    ██  ▄████▄   ██ ▄█▀       ██████╗ ██╗   ██╗ ██████╗
  * ▓██   ▒ ██  ▓██▒▒██▀ ▀█   ██▄█▒        ██╔══██╗██║   ██║██╔════╝
@@ -18,7 +20,7 @@ package com.example.mvplearn;
  * Update: lee(2018.03.26 14:09)
  */
 
-public interface MvpView extends BaseView  {
+public interface MvpView extends BaseView {
 
     /**
      * 当数据请求成功后，调用此接口显示数据

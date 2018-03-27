@@ -1,4 +1,4 @@
-package com.example.mvplearn;
+package com.example.mvplearn.base;
 
 /**
  * █████▒█    ██  ▄████▄   ██ ▄█▀       ██████╗ ██╗   ██╗ ██████╗
@@ -13,30 +13,44 @@ package com.example.mvplearn;
  * ░
  * Created by lee on 2018/3/26 0026
  * <p/>
- * Description:
+ * Description:  Presenter中持有的View都是BaseView的子类，这里同样需要泛型来约束
  * Author: lee
- * Update: lee(2018.03.26 18:02)
+ * Update: lee(2018.03.26 16:35)
  */
 
-public interface Callback<T> {
+public class BasePresenter<V extends BaseView> {
     /**
-     * 数据请求成功
-     * @param data 请求到的数据
+     * 绑定的view
      */
-    void onSuccess(T data);
+    private V mvpView;
+
     /**
-     *  使用网络API接口请求方式时，虽然已经请求成功但是由
-     *  于{@code msg}的原因无法正常返回数据。
+     * 绑定view，一般在初始化中调用该方法
      */
-    void onFailure(String msg);
+    public void attachView(V mvpView) {
+        this.mvpView = mvpView;
+    }
+
     /**
-     * 请求数据失败，指在请求网络API接口请求方式时，出现无法联网、
-     * 缺少权限，内存泄露等原因导致无法连接到请求数据源。
+     * 断开view，一般在onDestroy中调用
      */
-    void onError();
+    public void detachView() {
+        this.mvpView = null;
+    }
+
     /**
-     * 当请求数据结束时，无论请求结果是成功，失败或是抛出异常都会执行此方法给用户做处理，通常做网络
-     * 请求时可以在此处隐藏“正在加载”的等待控件
+     * 是否与View建立连接
+     * 每次调用业务请求的时候都要出先调用方法检查是否与View建立连接
      */
-    void onComplete();
+    public boolean isViewAttached(){
+        return mvpView != null;
+    }
+
+    /**
+     * 获取连接的view
+     */
+    public V getView(){
+        return mvpView;
+    }
 }
+

@@ -1,4 +1,6 @@
-package com.example.mvplearn;
+package com.example.mvplearn.base;
+
+import android.content.Context;
 
 /**
  * █████▒█    ██  ▄████▄   ██ ▄█▀       ██████╗ ██╗   ██╗ ██████╗
@@ -13,44 +15,33 @@ package com.example.mvplearn;
  * ░
  * Created by lee on 2018/3/26 0026
  * <p/>
- * Description:  Presenter中持有的View都是BaseView的子类，这里同样需要泛型来约束
+ * Description:
  * Author: lee
- * Update: lee(2018.03.26 16:35)
+ * Update: lee(2018.03.26 16:28)
  */
 
-public class BasePresenter<V extends BaseView> {
-    /**
-     * 绑定的view
-     */
-    private V mvpView;
+public interface BaseView {
 
     /**
-     * 绑定view，一般在初始化中调用该方法
+     * 显示正在加载view
      */
-    public void attachView(V mvpView) {
-        this.mvpView = mvpView;
-    }
-
+    void showLoading();
     /**
-     * 断开view，一般在onDestroy中调用
+     * 关闭正在加载view
      */
-    public void detachView() {
-        this.mvpView = null;
-    }
-
+    void hideLoading();
     /**
-     * 是否与View建立连接
-     * 每次调用业务请求的时候都要出先调用方法检查是否与View建立连接
+     * 显示提示
+     * @param msg
      */
-    public boolean isViewAttached(){
-        return mvpView != null;
-    }
-
+    void showToast(String msg);
     /**
-     * 获取连接的view
+     * 显示请求错误提示
      */
-    public V getView(){
-        return mvpView;
-    }
+    void showErr();
+    /**
+     * 获取上下文
+     * @return 上下文
+     */
+    Context getContext();
 }
-

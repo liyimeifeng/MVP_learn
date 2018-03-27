@@ -1,12 +1,10 @@
 package com.example.mvplearn;
 
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.mvplearn.base.BaseActivity;
 
 /**
  * 这是个模拟网络数据请求的demo，所以有三个请求数据的按钮分别对应成功、失败、异常三种不同的反馈状态
